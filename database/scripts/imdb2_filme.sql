@@ -29,7 +29,7 @@ CREATE TABLE `filme` (
   `titulo` varchar(255) DEFAULT NULL,
   `descricao` varchar(255) DEFAULT NULL,
   `ano_lancamento` int DEFAULT NULL,
-  `categorira` varchar(255) DEFAULT NULL,
+  `categoria` varchar(255) DEFAULT NULL,
   `idioma` varchar(255) DEFAULT NULL,
   `classificacao_indicativa` int DEFAULT NULL,
   PRIMARY KEY (`id_filme`)
