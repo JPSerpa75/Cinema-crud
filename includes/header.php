@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" style="width: 100%; height: 100%;">
 
 <head>
 	<meta charset="UTF-8">
@@ -10,7 +10,7 @@
 	<script src="https://unpkg.com/flowbite@1.5.1/dist/flowbite.js"></script>
 </head>
 
-<body>
+<body style="width: 100%; height: 100%;">
 
 	<nav class="bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700">
 		<div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
