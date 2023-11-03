@@ -11,8 +11,8 @@ class Conexao
 	public static function Conectar()
 	{
 		$server = "127.0.0.1";
-		$user = "root";             // Seu Usuário
-		$password = "itix.123";         // Sua Senha
+		$user = "";             // Seu Usuário
+		$password = "";         // Sua Senha
 		$db = "imdb2";
 
 		self::$senha = $password;
