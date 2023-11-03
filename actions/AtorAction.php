@@ -1,6 +1,6 @@
 <?php
 
-session_start();
+
 
 require "../database/ConexaoDatabase.php";
 
@@ -24,8 +24,7 @@ if (isset($_POST['btn-cadastrar'])) {
 		echo $connection->errorInfo();
 		// header('Location: ../../index.php');
 	}
-}
-if (isset($_POST['btn-editar'])) {
+} else if (isset($_POST['btn-editar'])) {
 	$nome = $_POST['floating_nome'];
 	$sobrenome = $_POST['floating_sobrenome'];
 	$id = $_POST['id'];
@@ -45,6 +44,19 @@ if (isset($_POST['btn-editar'])) {
 		echo $connection->errorInfo();
 		// header('Location: ../../index.php');
 	}
-}
-if (isset($_POST['btn-deletar'])) {
+} else if (isset($_GET['id'])) {
+	$id = $_GET['id'];
+
+	$connection = $conexao->Conectar();
+	$sql = "DELETE FROM atuacoes WHERE id_ator=:id; DELETE FROM ator WHERE id_ator=:id;";
+	$stmt = $connection->prepare($sql);
+	$stmt->bindValue(':id', $id);
+	if ($stmt->execute()) {
+		$_SESSION['mensagem'] = "Excluido com sucesso!";
+		header('Location: ../pages/atores/AtorList.php');
+	} else {
+		$_SESSION['mensagem'] = "Erro ao Excluir!";
+		echo $connection->errorInfo();
+		// header('Location: ../../index.php');
+	}
 }
