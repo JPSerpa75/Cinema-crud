@@ -1,6 +1,6 @@
 <?php
 
-session_start();
+
 
 require "../database/ConexaoDatabase.php";
 
@@ -22,7 +22,7 @@ if (isset($_POST['btn-cadastrar'])) {
 	$stmt->bindValue(':descricao', $descricao);
 	$stmt->bindValue(':ano', $anoLancamento);
 	$stmt->bindValue(':categoria', $categoria);
-	$stmt->bindValue(':idioma', 'portugues');
+	$stmt->bindValue(':idioma', $idioma);
 	$stmt->bindValue(':classificacao', $classificacaoIndicativa);
 
 	if ($stmt->execute()) {
@@ -33,8 +33,7 @@ if (isset($_POST['btn-cadastrar'])) {
 		echo $connection->errorInfo();
 		// header('Location: ../../index.php');
 	}
-}
-if (isset($_POST['btn-editar'])) {
+} else if (isset($_POST['btn-editar'])) {
 	$titulo = $_POST['floating_titulo'];
 	$descricao = $_POST['floating_descricao'];
 	$categoria = $_POST['floating_categoria'];
@@ -50,7 +49,7 @@ if (isset($_POST['btn-editar'])) {
 	$stmt->bindValue(':descricao', $descricao);
 	$stmt->bindValue(':ano', $anoLancamento);
 	$stmt->bindValue(':categoria', $categoria);
-	$stmt->bindValue(':idioma', 'portugues');
+	$stmt->bindValue(':idioma', $idioma);
 	$stmt->bindValue(':classificacao', $classificacaoIndicativa);
 	$stmt->bindValue(':id', $id);
 
@@ -62,6 +61,19 @@ if (isset($_POST['btn-editar'])) {
 		echo $connection->errorInfo();
 		// header('Location: ../../index.php');
 	}
-}
-if (isset($_POST['btn-deletar'])) {
+} else if (isset($_GET['id'])) {
+	$id = $_GET['id'];
+	// DELETE FROM atuacoes WHERE id_ator=:id;
+	$connection = $conexao->Conectar();
+	$sql = "DELETE FROM atuacoes WHERE id_filme=:id; DELETE FROM filme WHERE id_filme=:id;";
+	$stmt = $connection->prepare($sql);
+	$stmt->bindValue(':id', $id);
+	if ($stmt->execute()) {
+		$_SESSION['mensagem'] = "Excluido com sucesso!";
+		header('Location: ../pages/filmes/FilmeList.php');
+	} else {
+		$_SESSION['mensagem'] = "Erro ao Excluir!";
+		echo $connection->errorInfo();
+		// header('Location: ../../index.php');
+	}
 }
